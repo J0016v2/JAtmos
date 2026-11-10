@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="JAtmos weather dashboard with current conditions and a five-day forecast." />
+  <title>JAtmos | Weather Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js" defer></script>
+  <script src="config.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- Sidebar -->
+  <nav>
+    <div class="brand"><span class="brand-icon">☀</span><h1>J<span>Atmos</span></h1></div>
+    <ul>
+      <li class="active"><a href="#dashboard"><span class="nav-icon">▦</span>Dashboard</a></li>
+      <li><a href="#forecast"><span class="nav-icon">▤</span>Forecast</a></li>
+    </ul>
+    <div class="sidebar-bottom"><span class="status-dot"></span> Weather at a glance <small>Powered by OpenWeather</small></div>
+  </nav>
+
+  <!-- Main Dashboard -->
+  <main id="dashboard">
+    <header class="topbar">
+      <div id="profile">
+        <div class="profile">J</div>
+        <div class="greeting"><p>Hello,</p><h2>Justine</h2></div>
+      </div>
+      <form class="search" id="searchForm">
+        <label for="placeInput" class="sr-only">Search for a city</label>
+        <input type="search" id="placeInput" placeholder="Search city (e.g. Manila)" autocomplete="off" required />
+        <button id="search" type="submit" aria-label="Search location">⌕</button>
+      </form>
+    </header>
+
+    <div class="page-heading">
+      <div><p class="eyebrow">WEATHER DASHBOARD</p><h1>Today's Weather <span class="heading-accent">☁</span></h1><p>Stay updated with the weather wherever you go.</p></div>
+      <p id="updatedAt">Updated: --</p>
+    </div>
+    <p id="statusMessage" class="status-message" role="status" aria-live="polite"></p>
+
+    <section class="dayForecast" aria-label="Current weather and temperature chart">
+      <div id="dayWeather">
+        <div class="weather-location"><span>⌖</span><p id="cityName">Loading...</p></div>
+        <img id="weatherIcon" src="https://openweathermap.org/img/wn/02d@2x.png" alt="Weather conditions" />
+        <h2><span id="currentTemp">--</span><small>°C</small></h2>
+        <div class="weather-description"><p id="weatherDescription">Fetching weather...</p><p id="localTime">--:--</p></div>
+        <div class="weather-extras"><span>Feels like <strong id="feelsLike">--°</strong></span><span>Humidity <strong id="humidity">--%</strong></span></div>
+      </div>
+      <article class="temperatureContainer">
+        <div class="card-heading"><div><h3>Temperature Forecast</h3><p>Next 24 hours • every 3 hours</p></div><span class="card-symbol">↗</span></div>
+        <div class="temperature-chart"><canvas id="temperature" aria-label="Temperature forecast chart"></canvas></div>
+      </article>
+    </section>
+
+    <section class="overview" aria-labelledby="overviewTitle">
+      <div class="section-heading"><div><p class="eyebrow">QUICK DETAILS</p><h2 id="overviewTitle">Today's Overview</h2></div></div>
+      <div class="overview-grid">
+        <article>
+          <div class="overview-copy"><h3>Rain Chance</h3><p class="indicator" id="rainMessage">Next forecast period</p><p class="metric-label">Chance of precipitation</p></div>
+          <div class="overviewCanvasContainer"><canvas id="rain" aria-label="Rain chance chart"></canvas><span id="rainValue">--%</span></div>
+        </article>
+        <article>
+          <div class="overview-copy"><h3>UV Index</h3><p class="indicator" id="uvMessage">Checking UV conditions</p><p class="metric-label">Today's estimated maximum</p></div>
+          <div class="overviewCanvasContainer"><canvas id="uv" aria-label="UV index chart"></canvas><span id="uvValue">--</span></div>
+        </article>
+        <article class="detail-card"><span class="detail-icon">♨</span><div><h3>Wind Speed</h3><p id="windSpeed">-- km/h</p><small>Current wind</small></div></article>
+        <article class="detail-card"><span class="detail-icon">◈</span><div><h3>Humidity</h3><p id="humidityDetail">--%</p><small>Current humidity</small></div></article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Forecast sidebar -->
+  <aside id="forecast">
+    <div class="aside-heading"><p class="eyebrow">PLAN AHEAD</p><h2>5-Day Forecast</h2><p>Daily outlook for your selected city</p></div>
+    <div class="weekContainer" id="weekContainer"><p class="forecast-loading">Loading forecast...</p></div>
+    <div class="forecast-note">Forecasts are estimates and may change.</div>
+  </aside>
+</body>
+</html>
